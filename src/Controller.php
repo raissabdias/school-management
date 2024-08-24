@@ -14,7 +14,10 @@ class Controller
          * Validar se há mensagens na sessão, atribuir e remover da sessão
          */
         if (isset($_SESSION['flash_message']) && $_SESSION['flash_message']) {
-            $this->message = $_SESSION['flash_message'];
+            $this->message = [
+                'text' => $_SESSION['flash_message'],
+                'type' => $_SESSION['flash_message_type'] ?? 'success'
+            ];
             $this->setMessage(null);
         }
     }
@@ -54,9 +57,10 @@ class Controller
      * Salvar mensagem na sessão
      * @param string $url
      */
-    public function setMessage($message)
+    public function setMessage($message, $type = 'success')
     {
         $_SESSION['flash_message'] = $message;
+        $_SESSION['flash_message_type'] = $type;
         return true;
     }
 }

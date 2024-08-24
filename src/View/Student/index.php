@@ -29,6 +29,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Data de Nascimento</th>
                             <th scope="col">Usuário</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,7 @@
                                 <td><?= $student['name'] ?></td>
                                 <td><?= $student['birth_date'] ?></td>
                                 <td><?= $student['username'] ?></td>
+                                <td><a href="/alunos/editar?id=<?= $student['id'] ?>">Editar</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

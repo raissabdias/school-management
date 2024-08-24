@@ -8,7 +8,6 @@ class Router
 
     private function addRoute($route, $controller, $action, $method)
     {
-
         $this->routes[$method][$route] = ['controller' => $controller, 'action' => $action];
     }
 

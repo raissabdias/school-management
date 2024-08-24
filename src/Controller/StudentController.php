@@ -69,4 +69,54 @@ class StudentController extends Controller
 
         $this->render('Student/add', $data);
     }
+
+    public function edit()
+    {
+        $id = $_GET['id'] ?? 0;
+        $student = $this->model->get($id);
+
+        /**
+         * Aluno não encontrado
+         */
+        if (!$student) {
+            $this->setMessage('Aluno não encontrado. Tente novamente', 'danger');
+            $this->redirect('/alunos');
+        }
+
+        /**
+         * Dados default para a view
+         */
+        $data = [
+            'controller' => 'Student',
+            'form' => [],
+            'errors' => [],
+            'student' => $student
+        ];
+
+        if ($this->isPost()) {
+            $validation = Validator::student($_POST);
+        
+            if ($validation['valid'] === false) {
+                /**
+                 * Formulário inválido, devolver mensagens de erro e campos para edição
+                 */
+                $data['errors'] = $validation['messages'];
+                $data['student'] = $_POST;
+            } else {
+                $result = $this->model->edit($id, $_POST);
+                if ($result) {
+                    $this->setMessage("Aluno #$id editado com sucesso");
+                    $this->redirect('/alunos');
+                }
+
+                /**
+                 * Erro na inserção, devolver mensagens de erro e campos para edição
+                 */
+                $data['errors'] = ['Erro ao processar formulário. Tente novamente'];
+                $data['form'] = $_POST;
+            }
+        }
+
+        $this->render('Student/edit', $data);
+    }
 }

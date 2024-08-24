@@ -13,6 +13,8 @@ $router->get('/', HomeController::class, 'index');
 $router->get('/alunos', StudentController::class, 'index');
 $router->get('/alunos/adicionar', StudentController::class, 'add');
 $router->post('/alunos/adicionar', StudentController::class, 'add');
+$router->get('/alunos/editar', StudentController::class, 'edit');
+$router->post('/alunos/editar', StudentController::class, 'edit');
 
 $router->get('/turmas', ClassController::class, 'index');
 $router->get('/matriculas', EnrollmentController::class, 'index');
