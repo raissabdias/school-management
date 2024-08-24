@@ -88,4 +88,16 @@ class Student
 
         return false;
     }
+
+    public function changeStatus($id, $status = 0)
+    {
+        $stmt = $this->connection->prepare("UPDATE students SET status = ? WHERE id = ?");
+        $stmt->bind_param('ii', $status, $id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+    }
 }

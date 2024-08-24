@@ -40,7 +40,10 @@
                                 <td><?= $student['name'] ?></td>
                                 <td><?= $student['birth_date'] ?></td>
                                 <td><?= $student['username'] ?></td>
-                                <td><a href="/alunos/editar?id=<?= $student['id'] ?>">Editar</a></td>
+                                <td>
+                                    <a href="/alunos/editar?id=<?= $student['id'] ?>">Editar</a>
+                                    <a href="/alunos/excluir?id=<?= $student['id'] ?>">Excluir</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -56,6 +59,9 @@
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
             },
+            "columnDefs": [
+                {"className": "dt-center", "targets": "_all"}
+            ],
             'order':[
                 [1, 'asc']
             ]

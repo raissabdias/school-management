@@ -110,7 +110,7 @@ class StudentController extends Controller
                 }
 
                 /**
-                 * Erro na inserção, devolver mensagens de erro e campos para edição
+                 * Erro na edição, devolver mensagens de erro e campos para edição
                  */
                 $data['errors'] = ['Erro ao processar formulário. Tente novamente'];
                 $data['student'] = $_POST;
@@ -118,5 +118,31 @@ class StudentController extends Controller
         }
 
         $this->render('Student/edit', $data);
+    }
+
+    public function remove()
+    {
+        $id = $_GET['id'] ?? 0;
+        $student = $this->model->get($id);
+
+        /**
+         * Aluno não encontrado
+         */
+        if (!$student) {
+            $this->setMessage('Aluno não encontrado. Tente novamente', 'danger');
+            $this->redirect('/alunos');
+        }
+
+        $result = $this->model->changeStatus($id);
+        if ($result) {
+            $this->setMessage("Aluno #$id removido com sucesso");
+            $this->redirect('/alunos');
+        }
+
+        /**
+         * Erro na inserção, devolver mensagens de erro e campos para edição
+         */
+        $data['errors'] = ['Erro ao remover aluno. Tente novamente'];
+        $data['student'] = $_POST;
     }
 }

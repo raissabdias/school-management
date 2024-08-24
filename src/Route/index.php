@@ -15,6 +15,7 @@ $router->get('/alunos/adicionar', StudentController::class, 'add');
 $router->post('/alunos/adicionar', StudentController::class, 'add');
 $router->get('/alunos/editar', StudentController::class, 'edit');
 $router->post('/alunos/editar', StudentController::class, 'edit');
+$router->get('/alunos/excluir', StudentController::class, 'remove');
 
 $router->get('/turmas', ClassController::class, 'index');
 $router->get('/matriculas', EnrollmentController::class, 'index');
