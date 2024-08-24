@@ -19,6 +19,9 @@
             </div>
             <div class="col-12">
                 <hr>
+                <!-- Exibir mensagens rápidas -->
+                <?php include dirname(__DIR__) . '/Elements/flash_message.php';  ?>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -29,12 +32,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>João Silva</td>
-                            <td>01/01/2001</td>
-                            <td>joao.silva</td>
-                        </tr>
+                        <?php foreach ($students as $student): ?>
+                            <tr>
+                                <th scope="row"><?= $student['id'] ?></th>
+                                <td><?= $student['name'] ?></td>
+                                <td><?= $student['birth_date'] ?></td>
+                                <td><?= $student['username'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

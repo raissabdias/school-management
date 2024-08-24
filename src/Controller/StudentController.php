@@ -4,14 +4,31 @@ namespace App\Controller;
 
 use App\Controller;
 use App\Helper\Validator;
+use App\Model\Student;
 use DateTime;
 
 class StudentController extends Controller
 {
+    private $model;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->model = new Student();
+    }
+
     public function index()
     {
+        /**
+         * Listagem de estudantes cadastrados
+         */
+        $students = $this->model->list();
+
         $this->render('Student/index', [
-            'controller' => 'Student'
+            'controller' => 'Student',
+            'message' => $this->message,
+            'students' => $students
         ]);
     }
 
@@ -22,14 +39,13 @@ class StudentController extends Controller
          */
         $data = [
             'controller' => 'Student',
-            'message' => null,
             'form' => [],
             'errors' => []
         ];
 
         if ($this->isPost()) {
             $validation = Validator::student($_POST);
-
+        
             if ($validation['valid'] === false) {
                 /**
                  * Formulário inválido, devolver mensagens de erro e campos para edição
@@ -37,7 +53,17 @@ class StudentController extends Controller
                 $data['errors'] = $validation['messages'];
                 $data['form'] = $_POST;
             } else {
-                $this->redirect('/alunos');
+                $id = $this->model->add($_POST);
+                if ($id) {
+                    $this->setMessage("Aluno #$id adicionado com sucesso");
+                    $this->redirect('/alunos');
+                }
+
+                /**
+                 * Erro na inserção, devolver mensagens de erro e campos para edição
+                 */
+                $data['errors'] = ['Erro ao processar formulário. Tente novamente'];
+                $data['form'] = $_POST;
             }
         }
 

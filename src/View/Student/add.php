@@ -20,11 +20,7 @@
             <div class="col-12">
                 <hr>
                 <!-- Exibir erros do formulário -->
-                <?php if (isset($errors) && $errors): ?>
-                    <div class="alert alert-danger text-center" role="alert">
-                        <?= implode(", <br>", $errors) ?>
-                    </div>
-                <?php endif; ?>
+                <?php include dirname(__DIR__) . '/Elements/errors.php';  ?>
                 
                 <!-- Formulário -->
                 <form class="mt-5" method="POST">
