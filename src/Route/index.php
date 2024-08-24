@@ -9,7 +9,11 @@ use App\Router;
 $router = new Router();
 
 $router->get('/', HomeController::class, 'index');
+
 $router->get('/alunos', StudentController::class, 'index');
+$router->get('/alunos/adicionar', StudentController::class, 'add');
+$router->post('/alunos/adicionar', StudentController::class, 'add');
+
 $router->get('/turmas', ClassController::class, 'index');
 $router->get('/matriculas', EnrollmentController::class, 'index');
 

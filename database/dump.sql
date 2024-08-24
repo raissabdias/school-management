@@ -1,0 +1,13 @@
+-- Criar banco de dados
+CREATE DATABASE school_management;
+
+-- Criar tabela de alunos
+CREATE TABLE students (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(150) NOT NULL,
+  birth_date TIMESTAMP NOT NULL,
+  username VARCHAR(50) NULL,
+  status TINYINT NULL DEFAULT 1,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id));
