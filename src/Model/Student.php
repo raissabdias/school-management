@@ -25,6 +25,7 @@ class Student
                 username
             FROM students 
             WHERE status = 1
+            ORDER BY name ASC
         ";
         $stmt = $this->connection->query($sql);
 

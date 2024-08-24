@@ -113,7 +113,7 @@ class StudentController extends Controller
                  * Erro na inserção, devolver mensagens de erro e campos para edição
                  */
                 $data['errors'] = ['Erro ao processar formulário. Tente novamente'];
-                $data['form'] = $_POST;
+                $data['student'] = $_POST;
             }
         }
 
