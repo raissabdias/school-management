@@ -43,3 +43,25 @@ VALUES
   ('Inglês', 'Saber falar Inglês é essencial! Quem sabe falar bem esse idioma está conectado com tudo o que acontece no mundo.', '2x por semana'),
   ('História', 'História é a ciência que estuda as ações humanas ao longo do tempo. O trabalho do historiador inclui uma análise minuciosa dos documentos que permitem o estudo do passado.', '2x por semana'),
   ('Educação Física', '"A Educação Física tem uma vantagem educacional que poucas disciplinas têm: o poder de adequação do conteúdo ao grupo social em que será trabalhada."', '1x por semana');
+
+-- Criar tabela de matrículas
+CREATE TABLE enrollments (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  student_id INT UNSIGNED NULL,
+  class_id INT UNSIGNED NULL,
+  status TINYINT NULL DEFAULT 1,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  INDEX student_fk_idx (student_id ASC) VISIBLE,
+  INDEX class_fk_idx (class_id ASC) VISIBLE,
+  CONSTRAINT student_fk
+    FOREIGN KEY (student_id)
+    REFERENCES students (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT class_fk
+    FOREIGN KEY (class_id)
+    REFERENCES classes (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

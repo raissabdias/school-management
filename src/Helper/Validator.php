@@ -2,6 +2,7 @@
 
 namespace App\Helper;
 
+use App\Model\Enrollments;
 use DateTime;
 
 class Validator
@@ -101,6 +102,52 @@ class Validator
             $messages[] = 'o tipo de turma deve ter mínimo 1 caracter e no máximo 50 caracteres';
         }
 
+        output:
+        return [
+            'valid' => $valid,
+            'messages' => $messages
+        ];
+    }
+
+    public static function enrollment($data, $id = null)
+    {
+        $valid = true;
+        $messages = [];
+
+        if (!$data) {
+            $valid = false;
+            $messages[] = 'Formulário vazio, preencha novamente';
+            goto output;
+        }
+
+        /**
+         * Estudante é obrigatório, e precisa ser inteiro
+         */
+        $student = $data['student_id'] ?? null;
+        if (!$student || !is_numeric($student)) {
+            $valid = false;
+            $messages[] = 'O estudante é obrigatório';
+        }
+
+        /**
+         * Turma é obrigatório, e precisa ser inteiro
+         */
+        $class = $data['class_id'] ?? null;
+        if (!$class || !is_numeric($class)) {
+            $valid = false;
+            $messages[] = 'A turma é obrigatória';
+        }
+
+        /**
+         * Verificar se o aluno já tem matrícula nessa turma
+         */
+        $enrollments = new Enrollments();
+        $has_enrollment = $enrollments->checkEnrollment($data['student_id'], $data['class_id'], $id);
+        if ($has_enrollment) {
+            $valid = false;
+            $messages[] = 'Aluno já matriculado nessa turma';
+        }
+        
         output:
         return [
             'valid' => $valid,

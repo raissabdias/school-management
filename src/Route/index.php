@@ -25,5 +25,10 @@ $router->post('/turmas/editar', ClassController::class, 'edit');
 $router->get('/turmas/excluir', ClassController::class, 'remove');
 
 $router->get('/matriculas', EnrollmentController::class, 'index');
+$router->get('/matriculas/adicionar', EnrollmentController::class, 'add');
+$router->post('/matriculas/adicionar', EnrollmentController::class, 'add');
+$router->get('/matriculas/editar', EnrollmentController::class, 'edit');
+$router->post('/matriculas/editar', EnrollmentController::class, 'edit');
+$router->get('/matriculas/excluir', EnrollmentController::class, 'remove');
 
 $router->dispatch();
