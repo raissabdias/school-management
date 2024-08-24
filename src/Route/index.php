@@ -18,6 +18,12 @@ $router->post('/alunos/editar', StudentController::class, 'edit');
 $router->get('/alunos/excluir', StudentController::class, 'remove');
 
 $router->get('/turmas', ClassController::class, 'index');
+$router->get('/turmas/adicionar', ClassController::class, 'add');
+$router->post('/turmas/adicionar', ClassController::class, 'add');
+$router->get('/turmas/editar', ClassController::class, 'edit');
+$router->post('/turmas/editar', ClassController::class, 'edit');
+$router->get('/turmas/excluir', ClassController::class, 'remove');
+
 $router->get('/matriculas', EnrollmentController::class, 'index');
 
 $router->dispatch();

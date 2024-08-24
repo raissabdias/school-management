@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Controller;
 use App\Helper\Validator;
-use App\Model\Student;
-use DateTime;
+use App\Model\Students;
 
 class StudentController extends Controller
 {
@@ -15,7 +14,7 @@ class StudentController extends Controller
     {
         parent::__construct();
 
-        $this->model = new Student();
+        $this->model = new Students();
     }
 
     public function index()

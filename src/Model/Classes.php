@@ -3,9 +3,8 @@
 namespace App\Model;
 
 use App\Helper\Connection;
-use PDO;
 
-class Student
+class Classes
 {
     private $db;
     private $connection;
@@ -21,9 +20,9 @@ class Student
         $sql = "SELECT 
                 id,
                 name,
-                DATE_FORMAT(birth_date, '%d/%m/%Y') AS birth_date,
-                username
-            FROM students 
+                description,
+                type
+            FROM classes 
             WHERE status = 1
             ORDER BY name ASC
         ";
@@ -37,9 +36,9 @@ class Student
         $sql = "SELECT 
                 id,
                 name,
-                birth_date,
-                username
-            FROM students 
+                description,
+                type
+            FROM classes 
             WHERE status = 1
                 AND id = ?
         ";
@@ -54,11 +53,11 @@ class Student
     public function add($data)
     {
         $name = $data['name'];
-        $birth_date = $data['birth_date'];
-        $username = $data['username'];
+        $description = $data['description'];
+        $type = $data['type'];
 
-        $stmt = $this->connection->prepare("INSERT INTO students(name, birth_date, username) VALUES (?, ?, ?)");
-        $stmt->bind_param('sss', $name, $birth_date, $username);
+        $stmt = $this->connection->prepare("INSERT INTO classes(name, description, type) VALUES (?, ?, ?)");
+        $stmt->bind_param('sss', $name, $description, $type);
 
         if ($stmt->execute()) {
             $id = $stmt->insert_id;
@@ -71,16 +70,16 @@ class Student
     public function edit($id, $data)
     {
         $name = $data['name'];
-        $birth_date = $data['birth_date'];
-        $username = $data['username'];
+        $description = $data['description'];
+        $type = $data['type'];
 
-        $stmt = $this->connection->prepare("UPDATE students SET
+        $stmt = $this->connection->prepare("UPDATE classes SET
             name = ?,
-            birth_date = ?,
-            username = ?
+            description = ?,
+            type = ?
             WHERE id = ?
         ");
-        $stmt->bind_param('sssi', $name, $birth_date, $username, $id);
+        $stmt->bind_param('sssi', $name, $description, $type, $id);
 
         if ($stmt->execute()) {
             return true;
@@ -91,7 +90,7 @@ class Student
 
     public function changeStatus($id, $status = 0)
     {
-        $stmt = $this->connection->prepare("UPDATE students SET status = ? WHERE id = ?");
+        $stmt = $this->connection->prepare("UPDATE classes SET status = ? WHERE id = ?");
         $stmt->bind_param('ii', $status, $id);
 
         if ($stmt->execute()) {
