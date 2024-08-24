@@ -139,7 +139,7 @@ class StudentController extends Controller
         }
 
         /**
-         * Erro na inserção, devolver mensagens de erro e campos para edição
+         * Erro na remoção, devolver mensagens de erro e campos para edição
          */
         $data['errors'] = ['Erro ao remover aluno. Tente novamente'];
         $data['student'] = $_POST;
