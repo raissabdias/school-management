@@ -4,6 +4,7 @@ use App\Controller\HomeController;
 use App\Controller\StudentController;
 use App\Controller\EnrollmentController;
 use App\Controller\ClassController;
+use App\Controller\UserController;
 use App\Router;
 
 $router = new Router();
@@ -30,5 +31,9 @@ $router->post('/matriculas/adicionar', EnrollmentController::class, 'add');
 $router->get('/matriculas/editar', EnrollmentController::class, 'edit');
 $router->post('/matriculas/editar', EnrollmentController::class, 'edit');
 $router->get('/matriculas/excluir', EnrollmentController::class, 'remove');
+
+$router->get('/login', UserController::class, 'login');
+$router->post('/login', UserController::class, 'login');
+$router->get('/logoff', UserController::class, 'logoff');
 
 $router->dispatch();

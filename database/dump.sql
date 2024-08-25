@@ -34,7 +34,7 @@ CREATE TABLE classes (
   updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id));
 
--- cadastros para turmas (Seeders)
+-- OPCIONAL: cadastros para turmas (Seeders)
 INSERT INTO classes
 	(name, description, type)
 VALUES
@@ -65,3 +65,20 @@ CREATE TABLE enrollments (
     REFERENCES classes (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+-- Criar tabela de usuários
+CREATE TABLE users (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NULL,
+  email VARCHAR(100) NULL,
+  password VARCHAR(100) NULL,
+  status TINYINT NULL DEFAULT 1,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id));
+
+-- Primeiro usuário administrador (senha 123456)
+INSERT INTO users
+	(name, email, password)
+VALUES 
+  ('Administrador', 'admin@admin.com', MD5(123456));

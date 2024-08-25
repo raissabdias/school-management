@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             Início
@@ -24,6 +24,10 @@
                     </a>
                 </li>
             </ul>
+        </div>
+        <div class="float-end">
+            Olá, <?= $_SESSION['auth']['name'] ?? 'Usuário' ?>
+            <a class="link-danger link-offset-2 link-underline-opacity-25 ps-4" href="/logoff">Sair</a>
         </div>
     </div>
 </nav>

@@ -154,4 +154,40 @@ class Validator
             'messages' => $messages
         ];
     }
+
+    public static function login($data)
+    {
+        $valid = true;
+        $messages = [];
+
+        if (!$data) {
+            $valid = false;
+            $messages[] = 'Formulário vazio, preencha novamente';
+            goto output;
+        }
+
+        /**
+         * Email é obrigatório
+         */
+        $email = $data['email'] ?? null;
+        if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $valid = false;
+            $messages[] = 'Email inválido';
+        }
+        
+        /**
+         * Senha é obrigatória
+         */
+        $password = $data['password'] ?? null;
+        if (!$password) {
+            $valid = false;
+            $messages[] = 'Senha é obrigatória';
+        }
+        
+        output:
+        return [
+            'valid' => $valid,
+            'messages' => $messages
+        ];
+    }
 }
